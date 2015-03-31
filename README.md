@@ -23,7 +23,7 @@ In the future we plan to add support for:
 
 # Installation
 
-Simply include the ma.js file in your <head> after your jQuery inclusion.  
+Simply include the ma.js file in your `<head>` after your jQuery inclusion.
 
 
 # Methods
@@ -40,16 +40,16 @@ For reference regarding Google Analytics general implementation please see Googl
 Loads GA and sends initial call. In short, works exactly like a regular GA tracking code. 
 
 Example: 
-```
-ma.ga(‚load’, ‚UA-55450170-1’);
+```javascript
+ma.ga('load', 'UA-55450170-1');
 ```
 
 - ma.ga(‘click’, **CSS selector**, ‘event’, **cat**, **act**, (optional) **lab**, (optional) **val**, (optional) **custom variables**);
 Sends a GA event on a click of a certain element. Basically based on jQuery’s .on(‚click’). 
 
 Example:
-```
-ma.ga(‚click’, ‚#myBanner’, ‚event’, ‚Homepage’, ‚Banner 1 Click’, ‚Header’);
+```javascript
+ma.ga('click', '#myBanner', 'event', 'Homepage', 'Banner 1 Click', 'Header');
 ```
 
 # Wishlist
