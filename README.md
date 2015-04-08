@@ -62,7 +62,7 @@ To configure set up the .config object with the following parameters:
 '''js
 ma.scrollTracking.config = {
 	'platform' : '**your platform**', (eg. 'ga')
-	'scrollPoints' : '**your scrollpoints in percents**', (eg. '25, 50, 75, 100')
+	'scrollPoints' : ['**your scrollpoints in percents**'], (eg. ['25, 50, 75, 100'])
 	'events' : {
 		'event1' : [**'Category','Action','Label'**], (label being optional)
 		'event2' : [**'Category','Action','Label'**], (label being optional)
@@ -78,7 +78,7 @@ Example:
 $(document).ready(function(){
 	ma.scrollTracking.config = {
 	'platform' : 'ga',
-	'scrollPoints' : '25, 50, 75, 100',
+	'scrollPoints' : '[25, 50, 75, 100]',
 	'events' : {
 		'event1' : ['Scrolling','25%'],
 		'event2' : ['Scrolling','50%'],
