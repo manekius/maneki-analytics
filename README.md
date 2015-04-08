@@ -64,10 +64,10 @@ ma.scrollTracking.config = {
 	'platform' : '**your platform**', (eg. 'ga')
 	'scrollPoints' : ['**your scrollpoints in percents**'], (eg. ['25, 50, 75, 100'])
 	'events' : {
-		'event1' : [**'Category','Action','Label'**], (label being optional)
-		'event2' : [**'Category','Action','Label'**], (label being optional)
-		'event3' : [**'Category','Action','Label'**], (label being optional)
-		'event4' : [**'Category','Action','Label'**]  (label being optional)
+		'**scroll point 1**' : [**'Category','Action','Label'**], (label being optional)
+		'**scroll point 2**' : [**'Category','Action','Label'**], (label being optional)
+		'**scroll point 3**' : [**'Category','Action','Label'**], (label being optional)
+		'**scroll point 4**' : [**'Category','Action','Label'**]  (label being optional)
 	}
 };
 '''
@@ -80,10 +80,10 @@ $(document).ready(function(){
 	'platform' : 'ga',
 	'scrollPoints' : '[25, 50, 75, 100]',
 	'events' : {
-		'event1' : ['Scrolling','25%'],
-		'event2' : ['Scrolling','50%'],
-		'event3' : ['Scrolling','75%'],
-		'event4' : ['Scrolling','100%']
+		'25' : ['Scrolling','25%'],
+		'50' : ['Scrolling','50%'],
+		'75' : ['Scrolling','75%'],
+		'100' : ['Scrolling','100%']
 		}
 	};
 
