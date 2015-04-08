@@ -25,31 +25,75 @@ In the future we plan to add support for:
 
 Simply include the ma.js file in your <head> after your jQuery inclusion.  
 
-
 # Methods
 
 To make the tracking implementation much faster Maneki Analytics include a set of multiple methods covering most of the tracking requirements.
 
-The methods will differ regarding to what Digital Analytics platform is currently used.
+The methods will differ regarding to what Digital Analytics platform is currently being used.
 
 ## Google Analytics
 
-For reference regarding Google Analytics general implementation please see Google’s documentation:
+For reference regarding Google Analytics general implementation please see Google's documentation:
 
-- ma.ga(‚load’, ‚**account ID**, (optional) **domain name**, (optional) **custom variables**);
+- ma.ga('load', '**account ID**, (optional) **domain name**, (optional) **custom variables**);
 Loads GA and sends initial call. In short, works exactly like a regular GA tracking code. 
 
 Example: 
-’’’
-ma.ga(‚load’, ‚UA-55450170-1’);
-‚’’ 
+'''js
+ma.ga('load', 'UA-55450170-1');
+''' 
 
-- ma.ga(‘click’, **CSS selector**, ‘event’, **cat**, **act**, (optional) **lab**, (optional) **val**, (optional) **custom variables**);
-Sends a GA event on a click of a certain element. Basically based on jQuery’s .on(‚click’). 
+- ma.ga(‘click', **CSS selector**, ‘event', **cat**, **act**, (optional) **lab**, (optional) **val**, (optional) **custom variables**);
+Sends a GA event on a click of a certain element. Basically based on jQuery's .on('click'). 
 
 Example:
-‚’’
-ma.ga(‚click’, ‚#myBanner’, ‚event’, ‚Homepage’, ‚Banner 1 Click’, ‚Header’);
-‚’’
+'''js
+ma.ga('click', '#myBanner', 'event', 'Homepage', 'Banner 1 Click', 'Header');
+'''
+
+# Scroll Tracking
+
+In addition to tracking loads and clicks Maneki Analytics also features advanced scroll tracking right out of the box! 
+## Methods
+
+- ma.scrollTracking();
+Tracks scrolling according to the configuration. 
+To configure set up the .config object with the following parameters:
+'''js
+ma.scrollTracking.config = {
+	'platform' : '**your platform**', (eg. 'ga')
+	'scrollPoints' : '**your scrollpoints in percents**', (eg. '25, 50, 75, 100')
+	'events' : {
+		'event1' : [**'Category','Action','Label'**], (label being optional)
+		'event2' : [**'Category','Action','Label'**], (label being optional)
+		'event3' : [**'Category','Action','Label'**], (label being optional)
+		'event4' : [**'Category','Action','Label'**]  (label being optional)
+	}
+};
+'''
+Then, simply call the ma.scrollTracking() function. 
+
+Example:
+'''js
+$(document).ready(function(){
+	ma.scrollTracking.config = {
+	'platform' : 'ga',
+	'scrollPoints' : '25, 50, 75, 100',
+	'events' : {
+		'event1' : ['Scrolling','25%'],
+		'event2' : ['Scrolling','50%'],
+		'event3' : ['Scrolling','75%'],
+		'event4' : ['Scrolling','100%']
+		}
+	};
+
+	ma.scrollTracking();
+});
 
 # Wishlist
+
+We are planning on adding much more features in the future releases, such as:
+- automatic form abandonment tracking,
+- even better scroll tracking (with custom elements instead percents as breakpoints), 
+- support for Adobe Analytics, 
+- support for Piwik. 
