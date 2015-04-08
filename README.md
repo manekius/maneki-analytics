@@ -23,7 +23,7 @@ In the future we plan to add support for:
 
 # Installation
 
-Simply include the ma.js file in your <head> after your jQuery inclusion.  
+Simply include the ma.js file in your `<head>` after your jQuery inclusion.
 
 # Methods
 
