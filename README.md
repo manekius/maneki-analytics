@@ -39,42 +39,43 @@ For reference regarding Google Analytics general implementation please see Googl
 Loads GA and sends initial call. In short, works exactly like a regular GA tracking code. 
 
 Example: 
-'''js
+```js
 ma.ga('load', 'UA-55450170-1');
-''' 
+``` 
 
 - ma.ga(‘click', **CSS selector**, ‘event', **cat**, **act**, (optional) **lab**, (optional) **val**, (optional) **custom variables**);
 Sends a GA event on a click of a certain element. Basically based on jQuery's .on('click'). 
 
 Example:
-'''js
+```js
 ma.ga('click', '#myBanner', 'event', 'Homepage', 'Banner 1 Click', 'Header');
-'''
+```
 
 # Scroll Tracking
 
 In addition to tracking loads and clicks Maneki Analytics also features advanced scroll tracking right out of the box! 
+
 ## Methods
 
 - ma.scrollTracking();
 Tracks scrolling according to the configuration. 
 To configure set up the .config object with the following parameters:
-'''js
+```js
 ma.scrollTracking.config = {
-	'platform' : '**your platform**', (eg. 'ga')
-	'scrollPoints' : ['**your scrollpoints in percents**'], (eg. ['25, 50, 75, 100'])
+	'platform' : 'your platform', //(eg. 'ga')
+	'scrollPoints' : ['your scrollpoints in percents'], //(eg. ['25, 50, 75, 100'])
 	'events' : {
-		'**scroll point 1**' : [**'Category','Action','Label'**], (label being optional)
-		'**scroll point 2**' : [**'Category','Action','Label'**], (label being optional)
-		'**scroll point 3**' : [**'Category','Action','Label'**], (label being optional)
-		'**scroll point 4**' : [**'Category','Action','Label'**]  (label being optional)
+		'scroll point 1' : ['Category','Action','Label (optional)'], 
+		'scroll point 2' : ['Category','Action','Label (optional)'],
+		'scroll point 3' : ['Category','Action','Label (optional)'],
+		'scroll point 4' : ['Category','Action','Label (optional)']
 	}
 };
-'''
+```
 Then, simply call the ma.scrollTracking() function. 
 
 Example:
-'''js
+```js
 $(document).ready(function(){
 	ma.scrollTracking.config = {
 	'platform' : 'ga',
@@ -89,6 +90,7 @@ $(document).ready(function(){
 
 	ma.scrollTracking();
 });
+```
 
 # Wishlist
 
