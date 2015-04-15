@@ -62,35 +62,34 @@ Tracks scrolling according to the configuration.
 To configure set up the .config object with the following parameters:
 ```js
 ma.scrollTracking.config = {
-	'platform' : 'your platform', //(eg. 'ga')
-	'scrollPoints' : ['your scrollpoints in percents'], //(eg. ['25, 50, 75, 100'])
-	'events' : {
-		'scroll point 1' : ['Category','Action','Label (optional)'], 
-		'scroll point 2' : ['Category','Action','Label (optional)'],
-		'scroll point 3' : ['Category','Action','Label (optional)'],
-		'scroll point 4' : ['Category','Action','Label (optional)']
+	'scrollPoints' : [number, ...], // numbers are percentages of window bottom relative to whole document
+	'events' : { // key numbers equal to scrollPoint
+		number : ['Category','Action','Label (optional)'],
+    .
+    .
+    .
 	}
 };
 ```
-Then, simply call the ma.scrollTracking() function. 
+Then, simply call the `ma.scrollTracking()` function.
 
 Example:
 ```js
 $(document).ready(function(){
 	ma.scrollTracking.config = {
-	'platform' : 'ga',
-	'scrollPoints' : '[25, 50, 75, 100]',
+	'scrollPoints' : [25, 50, 75, 100],
 	'events' : {
-		'25' : ['Scrolling','25%'],
-		'50' : ['Scrolling','50%'],
-		'75' : ['Scrolling','75%'],
-		'100' : ['Scrolling','100%']
+		25 : ['Scrolling','25%'],
+		50 : ['Scrolling','50%'],
+		75 : ['Scrolling','75%'],
+		100 : ['Scrolling','100%']
 		}
 	};
 
 	ma.scrollTracking();
 });
 ```
+You can also pass config object to `ma.scrollTracking(config)`
 
 # Wishlist
 

@@ -7,9 +7,7 @@
   var ma =  {
     ga: function (op) {
       var argsToPass = Array.prototype.slice.call(arguments, 1);
-      if (op === 'load') {
-        this.ga.prototype.load.apply(this.ga.prototype, argsToPass);
-      }
+      this.ga.prototype[op].apply(this.ga.prototype, argsToPass);
     }
   };
   ma.ga.prototype.load = function (trackingID, domainName, customVars) {
@@ -67,6 +65,29 @@
       this.getGA()('set', gaSets[i][0], gaSets[i][1]);
     }
   };
+
+  // send pageview to ga
+  ma.ga.prototype.pageview = function () {
+    this.getGA()('send', 'pageview');
+  };
+
+  // attatch click event to selector that sends ga click event
+  // ma.ga(‘click', **CSS selector**, ‘event', **cat**, **act**, (optional) **lab**, (optional) **val**, (optional) **custom variables**)
+  ma.ga.prototype.click = function (selector, hittype) {
+    var ga, callParams;
+    if ((hittype === 'event' && arguments.length < 2)) {
+      throw new Error('You need to set category of an event.');
+    }
+    ga = this.getGA();
+    callParams = ['send', hittype];
+    if (arguments.length > 2) {
+      callParams = callParams.concat(Array.prototype.slice.call(arguments, 2, arguments.length));
+    }
+    $(selector).on('click', function () {
+      window[window.GoogleAnalyticsObject].apply(window, callParams);
+    });
+  };
+
   // check if Google Universal Analytics object exists
   ma.ga.prototype.gaExists = function () {
     return window.GoogleAnalyticsObject !== undefined;
@@ -96,6 +117,41 @@
     }
     return false;
   };
+  ma.scrollTracking = function (config) {
+    if (!config && !ma.scrollTracking.config) {
+      return new Error("tracking config not provided");
+    }
+    if (!config.scrollPoints || !(config.scrollPoints instanceof Array)) {
+      return new Error("you need to define scrollPoints as Array");
+    }
+
+    config.scrollPoints.map(function (value) {
+      return parseFloat(value);
+    });
+    ma.scrollTracking.config = config;
+
+    $(window).on('scroll', function (e) {
+      var $w, config, currentPosition, highPoint, event;
+      $w = $(window);
+      config = ma.scrollTracking.config;
+      currentPosition = ($w.scrollTop() + $w.height()) / $(document).height() * 100;
+      highPoint = -1;
+      config.scrollPoints.forEach(function (val) {
+        if (val <= currentPosition) {
+          highPoint = val;
+        }
+      });
+      event = config.events[highPoint];
+      if (event && !window.sendingEvent) {
+        window.sendingEvent = true;
+        window[window.GoogleAnalyticsObject]('send', 'event', event[0], event[1], event[2]);
+        config.scrollPoints = config.scrollPoints.filter(function (val) {
+          return val !== highPoint;
+        });
+        window.sendingEvent = false;
+      }
+    });
+  };
 
   window[alias] = ma;
-}(window, document));
+}(window, document, jQuery));
